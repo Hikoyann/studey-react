@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import styles from "@/src/components/Links/Links.module.css";
+import styles from "src/components/Links/Links.module.css";
 
 const ITEMS = [
   {
