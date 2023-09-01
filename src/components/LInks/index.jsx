@@ -36,7 +36,7 @@ export function Links() {
       {ITEMS.map((item) => {
         return (
           <a
-            // key={item.href}
+            key={item.href}
             href={item.href}
             className={styles.card}
             target="_blank"
