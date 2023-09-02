@@ -1,6 +1,5 @@
 import { Inter } from "next/font/google";
 import styles from "@/src/components/Links/Links.module.css";
-// Linksのフォルダ名を間違えていたため変更しました。
 
 const ITEMS = [
   {
