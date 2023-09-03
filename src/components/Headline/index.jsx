@@ -9,7 +9,10 @@ export function Headline(props) {
   return (
     <>
       <div className={styles.description}>
-        <p>Get started by editing&nbsp;{props.children}</p>
+        <p>アイテムの数は&nbsp;{props.children}個です</p>
+
+        <button onClick={props.handleReduce}>減らす</button>
+
         <div>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
