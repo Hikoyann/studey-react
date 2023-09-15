@@ -4,10 +4,10 @@ import { useCallback, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export function Links({ items }) {
+export const Links = (props) => {
   return (
     <div className={styles.grid}>
-      {items.map((item) => {
+      {props.items.map((item) => {
         return (
           <a
             key={item.href}
@@ -23,4 +23,4 @@ export function Links({ items }) {
       })}
     </div>
   );
-}
+};
