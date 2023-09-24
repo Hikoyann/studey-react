@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { useCallback, useEffect, useState, useReducer } from "react";
+import useSWR from "swr";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,43 +35,46 @@ const reducer = (state, action) => {
 };
 
 export const Posts = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const { data, error } = useSWR("https://jsonplaceholder.typicode.com/posts");
+  console.log({ data, error });
 
-  const getPosts = useCallback(async () => {
-    try {
-      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-      if (!res.ok) {
-        throw new Error("エラーが発生したため、データの取得に失敗");
-      }
-      const json = await res.json();
-      dispatch({ type: "end", data: json });
-    } catch (error) {
-      dispatch({ type: "error", error });
-    }
-  }, []);
+  // const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    getPosts();
-  }, [getPosts]);
+  // const getPosts = useCallback(async () => {
+  //   try {
+  //     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  //     if (!res.ok) {
+  //       throw new Error("エラーが発生したため、データの取得に失敗");
+  //     }
+  //     const json = await res.json();
+  //     dispatch({ type: "end", data: json });
+  //   } catch (error) {
+  //     dispatch({ type: "error", error });
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   getPosts();
+  // }, [getPosts]);
 
   console.log("foo");
 
-  if (state.loading) {
+  if (!error && !data) {
     return <div>ローディング中</div>;
   }
 
-  if (state.error) {
-    return <div>{state.error.message}</div>;
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
-  if (state.data.length === 0) {
+  if (data.length === 0) {
     return <div>データは空です</div>;
   }
 
   return (
     <>
       <ol>
-        {state.data.map((post) => {
+        {data.map((post) => {
           return <li key={post.id}>{post.title}</li>;
         })}
       </ol>
