@@ -1,28 +1,13 @@
+import { usePosts } from "@/src/hooks/usePosts";
 import { Inter } from "next/font/google";
-// import { useCallback, useEffect, useState, useReducer } from "react";
-import useSWR from "swr";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const fetcher = async (url) => {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error("エラーが発生したため、データの取得に失敗しました。");
-  }
-
-  const json = await response.json();
-  return json;
-};
-
 export const Posts = () => {
-  const { data, error } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
-    fetcher
-  );
+  const { data, error, isLoading, isEmpty } = usePosts();
   console.log({ data, error });
 
-  if (!error && !data) {
+  if (isLoading) {
     return <div>ローディング中</div>;
   }
 
@@ -30,7 +15,7 @@ export const Posts = () => {
     return <div>{error.message}</div>;
   }
 
-  if (data.length === 0) {
+  if (isEmpty) {
     return <div>データは空です</div>;
   }
 
