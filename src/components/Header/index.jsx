@@ -7,6 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 const NAV_ITEMS = [
   { href: "/", label: "Index" },
   { href: "/posts", label: "Posts" },
+  { href: "/Comments", label: "Comments" },
+  { href: "/Users", label: "Users" },
 ];
 
 export const Header = () => {
