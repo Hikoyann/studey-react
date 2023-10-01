@@ -27,7 +27,7 @@ export const Posts = () => {
           return (
             <li key={post.id}>
               {/* {post.id} */}
-              <Link href={`/post/${post.id}`}>
+              <Link href={`/posts/${post.id}`}>
                 {post.id}：{post.title}
               </Link>
             </li>
