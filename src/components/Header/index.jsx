@@ -5,8 +5,8 @@ import styles from "@/src/components/Header/Header.module.css";
 const inter = Inter({ subsets: ["latin"] });
 
 const NAV_ITEMS = [
+  { href: "/", label: "Index" },
   { href: "/posts", label: "Posts" },
-  { href: "/about", label: "about" },
 ];
 
 export const Header = () => {
