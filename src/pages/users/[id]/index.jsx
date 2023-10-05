@@ -19,11 +19,12 @@ const useUser = () => {
     data,
     error,
     isLoading: !data && !error,
+    isEmpty: data && data.length === 0,
   };
 };
 
 const UserComponent = () => {
-  const { data, error, isLoading } = useUser();
+  const { data, error, isEmpty, isLoading } = useUser();
 
   if (isLoading) {
     <div>Loading...</div>;
@@ -31,22 +32,25 @@ const UserComponent = () => {
   if (error) {
     <div>{error.messages}</div>;
   }
+  if (isEmpty) {
+    return <div>データは空です</div>;
+  }
   return (
     <div>
-      <h1>{data.name}</h1>
+      <h1>{data?.name}</h1>
       <ul>
-        <li>{data.email}</li>
-        <li>{data.username}</li>
-        <li>{data.address.city}</li>
-        <li>{data.phone}</li>
-        <li>{data.website}</li>
-        <li>{data.company.name}</li>
+        <li>{data?.email}</li>
+        <li>{data?.username}</li>
+        <li>{data?.address.city}</li>
+        <li>{data?.phone}</li>
+        <li>{data?.website}</li>
+        <li>{data?.company.name}</li>
       </ul>
     </div>
   );
 };
 
-const UserId = () => {
+const UsersId = () => {
   return (
     <>
       <Header />
@@ -55,4 +59,4 @@ const UserId = () => {
   );
 };
 
-export default UserId;
+export default UsersId;

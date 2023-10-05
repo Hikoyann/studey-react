@@ -1,16 +1,16 @@
 import { Inter } from "next/font/google";
 import { Header } from "@/src/components/Header";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import { fetcher } from "@/src/Utils/fetcher";
+import useSWR from "swr";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const useUser = () => {
+const useComment = () => {
   const router = useRouter();
   const { data, error } = useSWR(
     router.query.id
-      ? `https://jsonplaceholder.typicode.com/users/${router.query.id}`
+      ? `https://jsonplaceholder.typicode.com/comments/${router.query.id}`
       : null,
     fetcher
   );
@@ -19,11 +19,12 @@ const useUser = () => {
     data,
     error,
     isLoading: !data && !error,
+    isEmpty: data && data.length === 0,
   };
 };
 
-const UserComponent = () => {
-  const { data, error, isLoading } = useUser();
+const CommentComponent = () => {
+  const { data, error, isEmpty, isLoading } = useComment();
 
   if (isLoading) {
     <div>Loading...</div>;
@@ -31,28 +32,28 @@ const UserComponent = () => {
   if (error) {
     <div>{error.messages}</div>;
   }
+  if (isEmpty) {
+    return <div>データは空です</div>;
+  }
+
   return (
     <div>
-      <h1>{data.name}</h1>
+      <h1>{data?.body}</h1>
       <ul>
-        <li>{data.email}</li>
-        <li>{data.username}</li>
-        <li>{data.address.city}</li>
-        <li>{data.phone}</li>
-        <li>{data.website}</li>
-        <li>{data.company.name}</li>
+        <li>{data?.name}</li>
+        <li>{data?.email}</li>
       </ul>
     </div>
   );
 };
 
-const UserId = () => {
+const CommentsId = () => {
   return (
     <>
       <Header />
-      <UserComponent />
+      <CommentComponent />
     </>
   );
 };
 
-export default UserId;
+export default CommentsId;
