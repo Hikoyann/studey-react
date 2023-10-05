@@ -20,7 +20,7 @@ const useUsers = () => {
   };
 };
 
-const Users = () => {
+const UsersComponent = () => {
   const { data, error, isLoading, isEmpty } = useUsers();
 
   if (isLoading) {
@@ -32,23 +32,32 @@ const Users = () => {
   if (isEmpty) {
     return <p>No users found.</p>;
   }
+
+  return (
+    <ol>
+      {data.map((user) => {
+        return (
+          <li key={user.id}>
+            <Link href={`/users/${user.id}`}>
+              {`${user.name}` + "：" + `(${user.email})`}
+            </Link>
+          </li>
+        );
+      })}
+    </ol>
+  );
+};
+
+const Users = () => {
+  const { data, error, isLoading, isEmpty } = useUsers();
+
   return (
     <>
       <Head>
         <title>Users Page</title>
       </Head>
       <Header />
-      <ol>
-        {data.map((user) => {
-          return (
-            <li key={user.id}>
-              <Link href={`/users/${user.id}`}>
-                {`${user.name}` + "：" + `(${user.email})`}
-              </Link>
-            </li>
-          );
-        })}
-      </ol>
+      <UsersComponent />
     </>
   );
 };
