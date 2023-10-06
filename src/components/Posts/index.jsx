@@ -6,7 +6,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const Posts = () => {
   const { data, error, isLoading, isEmpty } = usePosts();
-  // console.log({ data, error });
 
   if (isLoading) {
     return <div>ローディング中</div>;
@@ -26,7 +25,6 @@ export const Posts = () => {
         {data.map((post) => {
           return (
             <li key={post.id}>
-              {/* {post.id} */}
               <Link href={`/posts/${post.id}`}>
                 {post.id}：{post.title}
               </Link>
