@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Header } from "@/src/components/Header";
 import { CommentsComponent } from "@/src/components/Comments";
-import { useUsers } from "@/src/hooks/useUsers";
 
 const inter = Inter({ subsets: ["latin"] });
 

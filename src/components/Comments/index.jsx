@@ -1,4 +1,4 @@
-import { useComments } from "@/src/hooks/useComments";
+import { useComments } from "@/src/hooks/useFetchArray";
 import Link from "next/link";
 
 export const CommentsComponent = () => {

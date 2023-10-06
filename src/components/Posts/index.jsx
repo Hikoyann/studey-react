@@ -1,4 +1,4 @@
-import { usePosts } from "@/src/hooks/usePosts";
+import { usePosts } from "@/src/hooks/useFetchArray";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
