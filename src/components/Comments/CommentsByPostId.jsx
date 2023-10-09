@@ -24,6 +24,7 @@ export const CommentsByPostId = (props) => {
             <Link href={`/comments/${comment.id}`}>
               {comment.id + "："}
               {`${comment.body}`}
+              {/* Githubに草が生えないため確認 */}
             </Link>
           </li>
         );
