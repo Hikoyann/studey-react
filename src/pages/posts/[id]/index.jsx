@@ -9,7 +9,6 @@ const PostsId = () => {
     <>
       <Header />
       <Post />
-      {/* 名前を変えた時にvercelの名前が変更されるかの確認 */}
     </>
   );
 };
