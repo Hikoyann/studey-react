@@ -3,11 +3,12 @@ import { Inter } from "next/font/google";
 import { Header } from "@/src/components/Header";
 import { CommentsComponent } from "@/src/components/Comments";
 import { SWRConfig } from "swr";
+import { API_URL } from "@/src/utils/const";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async () => {
-  const COMMENTS_API_URL = `https://jsonplaceholder.typicode.com/users/`;
+  const COMMENTS_API_URL = `${API_URL}/users/`;
   const comments = await fetch(COMMENTS_API_URL);
   const commentsData = await comments.json();
 

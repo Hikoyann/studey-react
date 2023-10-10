@@ -2,11 +2,10 @@ import { Header } from "@/src/components/Header";
 import { SWRConfig } from "swr";
 import { CommentComponent } from "@/src/components/Comment";
 import { notFound } from "next/navigation";
+import { API_URL } from "@/src/utils/const";
 
 export const getStaticPaths = async () => {
-  const comments = await fetch(
-    "https://jsonplaceholder.typicode.com/comments?_limit=10/"
-  );
+  const comments = await fetch(`${API_URL}/comments?_limit=10/`);
   const commentsData = await comments.json();
   const paths = commentsData.map((comment) => ({
     params: { id: comment.id.toString() },
@@ -19,7 +18,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (ctx) => {
   const { id } = ctx.params;
-  const COMMENTS_API_URL = `https://jsonplaceholder.typicode.com/comments/${id}`;
+  const COMMENTS_API_URL = `${API_URL}/comments/${id}`;
   const comments = await fetch(COMMENTS_API_URL);
 
   if (!comments.ok) {
