@@ -1,10 +1,8 @@
-import { fetcher } from "@/src/Utils/fetcher";
 import useSWR from "swr";
 
 export const UserByUserId = (props) => {
   const { data, error } = useSWR(
-    props?.id ? `https://jsonplaceholder.typicode.com/users/${props.id}` : null,
-    fetcher
+    props?.id ? `https://jsonplaceholder.typicode.com/users/${props.id}` : null
   );
   if (!data && !error) {
     return <div>ローディング中...</div>;
