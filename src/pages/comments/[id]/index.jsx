@@ -1,14 +1,44 @@
-import { Inter } from "next/font/google";
 import { Header } from "@/src/components/Header";
+import { SWRConfig } from "swr";
 import { CommentComponent } from "@/src/components/Comment";
 
-const inter = Inter({ subsets: ["latin"] });
+export const getStaticPaths = async () => {
+  const comments = await fetch(
+    "https://jsonplaceholder.typicode.com/comments/"
+  );
+  const commentsData = await comments.json();
+  const paths = commentsData.map((comment) => ({
+    params: { id: comment.id.toString() },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
-const CommentsId = () => {
+export const getStaticProps = async (ctx) => {
+  const { id } = ctx.params;
+  const COMMENTS_API_URL = `https://jsonplaceholder.typicode.com/comments/${id}`;
+  const comments = await fetch(COMMENTS_API_URL);
+  const commentsData = await comments.json();
+
+  return {
+    props: {
+      fallback: {
+        [COMMENTS_API_URL]: commentsData,
+      },
+    },
+  };
+};
+
+const CommentsId = (props) => {
+  const { fallback } = props;
   return (
     <>
       <Header />
-      <CommentComponent />
+      <SWRConfig value={{ fallback }}>
+        <CommentComponent />
+      </SWRConfig>
     </>
   );
 };
