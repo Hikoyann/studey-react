@@ -20,7 +20,7 @@ export const CommentsComponent = () => {
         return (
           <li key={comment.id} className="border-b pb-2">
             <Link href={`/comments/${comment.id}`}>
-              <div className="block  text-sm hover:text-blue-500">{`${comment.body}`}</div>
+              <div className="block hover:text-blue-500">{`${comment.body}`}</div>
             </Link>
           </li>
         );
