@@ -1,8 +1,13 @@
-import { useComment } from "@/src/hooks/useComment";
-import { PostByCommentId } from "../Post/PostByCommentId";
+import PostTitleByCommentId from "../Post/PostTitleByCommentId";
+import { useRouter } from "next/router";
+import { useFetch } from "@/src/hooks/useFetch";
+import { API_URL } from "@/src/utils/const";
 
-export const CommentComponent = () => {
-  const { data, error, isEmpty, isLoading } = useComment();
+export const CommentDetail = () => {
+  const router = useRouter();
+  const { data, error, isEmpty, isLoading } = useFetch(
+    router.query.id ? `${API_URL}/comments/${router.query.id}` : null
+  );
 
   if (isLoading) {
     <div>Loading...</div>;
@@ -23,7 +28,7 @@ export const CommentComponent = () => {
 
       <h2 className="text-xl font-bold mt-10">元の記事</h2>
       <div className="mt-2">
-        <PostByCommentId id={data?.postId} />
+        <PostTitleByCommentId id={data?.postId} />
       </div>
     </div>
   );

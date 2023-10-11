@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
-import { Header } from "@/src/components/Header";
-import { UserComponent } from "@/src/components/User";
+
+import { UserDetail } from "@/src/components/User/UserDetail";
 import { SWRConfig } from "swr";
 import { API_URL } from "@/src/utils/const";
 
@@ -13,7 +13,7 @@ export const getServerSideProps = async (ctx) => {
   const user = await fetch(USER_API_URL);
   const userData = await user.json();
   // ユーザーの投稿の習得
-  const POSTS_API_URL = `${API_URL}/posts?userId/${userData}`;
+  const POSTS_API_URL = `${API_URL}/users/${userData.id}/posts`;
   const posts = await fetch(POSTS_API_URL);
   const postData = await posts.json();
 
@@ -31,8 +31,7 @@ const UsersId = (props) => {
   const { fallback } = props;
   return (
     <SWRConfig value={{ fallback }}>
-      <Header />
-      <UserComponent />
+      <UserDetail />
     </SWRConfig>
   );
 };

@@ -1,7 +1,5 @@
-import { Header } from "@/src/components/Header";
 import { SWRConfig } from "swr";
-import { CommentComponent } from "@/src/components/Comment";
-import { notFound } from "next/navigation";
+import { CommentDetail } from "@/src/components/Comment/CommentDEtail";
 import { API_URL } from "@/src/utils/const";
 
 export const getStaticPaths = async () => {
@@ -42,8 +40,7 @@ const CommentsId = (props) => {
   return (
     <>
       <SWRConfig value={{ fallback }}>
-        <Header />
-        <CommentComponent />
+        <CommentDetail />
       </SWRConfig>
     </>
   );

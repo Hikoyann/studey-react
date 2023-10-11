@@ -1,11 +1,12 @@
-import { usePosts } from "@/src/hooks/useFetchArray";
+import { useFetchArray } from "@/src/hooks/useFetchArray";
+import { API_URL } from "@/src/utils/const";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const Posts = () => {
-  const { data, error, isLoading, isEmpty } = usePosts();
+export const PostList = () => {
+  const { data, error, isLoading, isEmpty } = useFetchArray(`${API_URL}/Posts`);
 
   if (isLoading) {
     return <div>ローディング中</div>;
@@ -41,4 +42,4 @@ export const Posts = () => {
   );
 };
 
-export default Posts;
+export default PostList;

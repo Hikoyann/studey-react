@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import { Header } from "@/src/components/Header";
-import { UsersComponent } from "@/src/components/Users";
+import { UserList } from "@/src/components/User/UserList";
 import { SWRConfig } from "swr";
 import { API_URL } from "@/src/utils/const";
 
@@ -28,8 +27,7 @@ const Users = (props) => {
         <title>Users Page</title>
       </Head>
       <SWRConfig value={{ fallback }}>
-        <Header />
-        <UsersComponent />
+        <UserList />
       </SWRConfig>
     </>
   );

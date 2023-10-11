@@ -1,8 +1,9 @@
-import { useUsers } from "@/src/hooks/useFetchArray";
+import { useFetchArray } from "@/src/hooks/useFetchArray";
+import { API_URL } from "@/src/utils/const";
 import Link from "next/link";
 
-export const UsersComponent = () => {
-  const { data, error, isLoading, isEmpty } = useUsers();
+export const UserList = () => {
+  const { data, error, isLoading, isEmpty } = useFetchArray(`${API_URL}/Users`);
 
   if (isLoading) {
     return <p>Loading...</p>;

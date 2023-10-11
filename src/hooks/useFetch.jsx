@@ -1,7 +1,8 @@
 import useSWRImmutable from "swr/immutable";
 
-export const useFetchArray = (url) => {
+export const useFetch = (url) => {
   const { data, error } = useSWRImmutable(url);
+
   return {
     data,
     error,

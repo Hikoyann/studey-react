@@ -1,11 +1,15 @@
-import { usePost } from "@/src/hooks/usePost";
+import { useFetch } from "@/src/hooks/useFetch";
+import { API_URL } from "@/src/utils/const";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const PostByCommentId = (props) => {
-  const { data, error, isLoading } = usePost(props.id);
+export const PostTitleByCommentId = (props) => {
+  // const { data, error, isLoading } = usePost(props.id);
+  const { data, error, isLoading } = useFetch(
+    props.id ? `${API_URL}/posts/${props.id}` : null
+  );
 
   if (isLoading) {
     return <div>ローディング中</div>;
@@ -24,4 +28,4 @@ export const PostByCommentId = (props) => {
   );
 };
 
-export default PostByCommentId;
+export default PostTitleByCommentId;

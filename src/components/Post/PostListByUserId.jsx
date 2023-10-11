@@ -1,11 +1,14 @@
-import { usePostsByUserId } from "@/src/hooks/useFetchArray";
+import { useFetchArray } from "@/src/hooks/useFetchArray";
+import { API_URL } from "@/src/utils/const";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const PostsByUserId = (props) => {
-  const { data, error, isLoading, isEmpty } = usePostsByUserId(props.id);
+export const PostListByUserId = (props) => {
+  const { data, error, isLoading, isEmpty } = useFetchArray(
+    props.id ? `${API_URL}/users/${props.id}/posts` : null
+  );
 
   if (isLoading) {
     return <div>ローディング中</div>;
@@ -41,4 +44,4 @@ export const PostsByUserId = (props) => {
   );
 };
 
-export default PostsByUserId;
+export default PostListByUserId;
